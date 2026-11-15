@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Post-Training in Practice</title>
+<meta name="color-scheme" content="light dark">
+<meta name="description" content="Make an open model better than prompting at your task">
+<script>(function(){try{var t=localStorage.getItem("tfs-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t);if(localStorage.getItem("tfs-side")==="collapsed"&&matchMedia("(min-width:82.001rem)").matches)document.documentElement.classList.add("pre-collapsed");}catch(e){}})();</script>
+<link rel="stylesheet" href="assets/style.css?v=1">
+</head>
+<body>
+<main>
+
+<div class="hero">
+  <h1><span class="num">Course 2 &middot; Model track</span>Post-Training in Practice</h1>
+  <p class="lead">How to take a base or instruct model and make it measurably better at your task. You will decide whether to fine-tune at all, build and decontaminate a dataset, run SFT, preference optimisation and RL with verifiable rewards on real open models, keep what the model already knew, and prove the result with the methods of the Evaluation course. Transformers Ch 23–25 derived the algorithms; this course runs them.</p>
+  <div class="stats">
+    <div><b>20</b> chapters</div>
+    <div><b>~25</b> hours</div>
+    <div><b>5</b> parts</div>
+    <div><b>95</b> sections</div>
+  </div>
+  <div class="bar"><i id="pbar"></i></div>
+  <div class="tiny" style="margin-top:.6rem" id="pnote">Progress is saved in this browser.</div>
+</div>
+
+<div class="box warn">
+<span class="t">Status: outline for review</span>
+<p style="margin-bottom:0">Every chapter page exists and shows its planned sections and what you will build, so you can
+read the course's shape before it is written. Prose, figures, quizzes, exercises, notebooks and the reference package
+(<code>ptkit</code>) follow, chapter by chapter, to the same standard as
+<a href="/transformers-from-scratch/course/index.html">Transformers From Scratch</a>.</p>
+</div>
+
+<h2>Who this is for</h2>
+<p>Engineers who understand SFT, DPO and GRPO on paper and need to make them work on real models and real data.</p>
+
+<h3>Before you start</h3>
+<ul><li><a class="xref" data-course="transformers" data-ch="23" href="/transformers-from-scratch/course/ch23-sft-rlhf.html">Transformers&nbsp;Ch&nbsp;23</a> &mdash; SFT, LoRA, RLHF, and PPO</li><li><a class="xref" data-course="transformers" data-ch="24" href="/transformers-from-scratch/course/ch24-dpo.html">Transformers&nbsp;Ch&nbsp;24</a> &mdash; DPO From First Principles</li><li><a class="xref" data-course="transformers" data-ch="25" href="/transformers-from-scratch/course/ch25-grpo.html">Transformers&nbsp;Ch&nbsp;25</a> &mdash; DPO Variants, GRPO, and RLVR</li><li><a class="xref" data-course="evals" data-ch="06" href="/llm-evaluation/course/ch06-compare.html">Evaluation&nbsp;Ch&nbsp;06</a> &mdash; Comparing Two Systems</li></ul>
+
+<h2>By the end you can</h2>
+<ul><li>Decide between prompting, retrieval, fine-tuning and distillation with a cost model</li><li>Build, filter, deduplicate and decontaminate a training set</li><li>Train LoRA and full fine-tunes that beat a prompted baseline, and measure what was forgotten</li><li>Run DPO-family methods and GRPO-family RL with verifiers, and diagnose them from their logs</li><li>Evaluate and ship a fine-tune honestly</li></ul>
+
+<div class="mn"><span class="k">Current to</span>November 2026. The open recipes of 2025–26 (Tülu 3, OLMo 3: SFT → DPO → scaled RLVR); DAPO, Dr. GRPO, GSPO and CISPO as fixes to GRPO; asynchronous RL with inference engines and the trainer–sampler mismatch it creates; on-policy distillation; rubrics as rewards for tasks without verifiers; multi-turn agentic RL; model merging; &quot;LoRA without regret&quot; — when LoRA matches full fine-tuning and when it cannot.</div>
+
+<h2>The course</h2>
+<div class="parts" id="parts"></div>
+
+<h2>The capstone</h2>
+<p>Take an open 1–8B model to a measured win over the best prompt on a task you choose: a decontaminated dataset, an SFT and a preference or RL stage, a forgetting report, and a paired evaluation with intervals.</p>
+
+<h2>Colour is meaning</h2>
+<p>In this course the five semantic hues mark these roles, never decoration:</p>
+<div class="tw"><table class="hues"><tbody><tr><td><span class="hue" style="background:var(--dim-1)"></span></td><td>the policy</td></tr><tr><td><span class="hue" style="background:var(--dim-2)"></span></td><td>the reference model</td></tr><tr><td><span class="hue" style="background:var(--dim-3)"></span></td><td>the data</td></tr><tr><td><span class="hue" style="background:var(--dim-4)"></span></td><td>the reward</td></tr><tr><td><span class="hue" style="background:var(--dim-5)"></span></td><td>the verifier</td></tr></tbody></table></div>
+
+<h2>Deliberately not covered</h2>
+<p>Pre-training from scratch (Transformers Ch 11 and 21), and closed fine-tuning APIs except as a baseline.</p>
+
+<div style="margin-top:2.5rem;display:flex;gap:.7rem;align-items:center;flex-wrap:wrap">
+  <a class="btn primary" href="ch01-decide.html" style="text-decoration:none;border-bottom:0">Read the outline of Chapter 1 &rarr;</a>
+  <a class="btn" href="/" style="text-decoration:none;border-bottom:0">The library</a>
+</div>
+
+</main>
+
+<script src="assets/chapters.js?v=1"></script>
+<script src="assets/course.js?v=1"></script>
+<script>
+(function () {
+  const wrap = document.getElementById("parts");
+  PARTS.forEach((p, pi) => {
+    const d = document.createElement("div");
+    d.className = "part";
+    d.dataset.pi = pi;
+    d.innerHTML =
+      `<div class="ph"><span class="pn">${p.n}</span><span class="pt">${p.t}</span>` +
+      `<span class="pd">${p.d}</span></div><div class="clist">` +
+      p.ch.map(c => `
+        <a class="ccard ${isDone(c.id) ? "done" : ""}" href="${c.f}">
+          <div class="num">${c.id}</div>
+          <div class="txt"><div class="t">${c.t}</div><div class="s">${c.s}</div></div>
+          <div class="tag">${c.tag}</div>
+        </a>`).join("") + `</div>`;
+    wrap.appendChild(d);
+  });
+  const done = CHAPTERS.filter(c => isDone(c.id)).length;
+  document.getElementById("pbar").style.width = (done / CHAPTERS.length * 100) + "%";
+  document.getElementById("pnote").textContent = Store.available()
+    ? `${done} of ${CHAPTERS.length} chapters complete. Progress is saved in this browser, shared with every course in the library.`
+    : "Progress can’t be saved here: browser storage is blocked.";
+  buildLayout(); buildTopbar(null); buildSidebar(null); decorateCode();
+  initReadingBar(); initKeyboard(null); applySidebarPref(); layoutMarginNotes();
+  window.addEventListener("load", layoutMarginNotes);
+  let rt;
+  window.addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(() => { applySidebarPref(); layoutMarginNotes(); }, 100); });
+})();
+</script>
+</body>
+</html>
